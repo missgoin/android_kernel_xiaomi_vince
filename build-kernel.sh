@@ -10,66 +10,66 @@ export TC_PATH="$HOME/clang"
 export ZIP_DIR="$(pwd)/Flasher"
 export KERNEL_DIR=$(pwd)
 export KBUILD_BUILD_VERSION="1"
-export KBUILD_BUILD_USER="Unitrix-Kernel"
-export KBUILD_BUILD_HOST="Cosmic-Horizon"
-export KBUILD_BUILD_TIMESTAMP="$(TZ='Asia/Kolkata' date)"
+export KBUILD_BUILD_USER="unknown"
+export KBUILD_BUILD_HOST="Pancali"
+export KBUILD_BUILD_TIMESTAMP="$(TZ='Asia/Jakarta' date)"
 
 # Ask Telegram Channel/Chat ID
-if [[ -z ${CHANNEL_ID} ]]; then
-    echo -n "Plox,Give Me Your TG Channel/Group ID:"
-    read -r tg_channel_id
-    CHANNEL_ID="${tg_channel_id}"
-fi
+#if [[ -z ${CHANNEL_ID} ]]; then
+#    echo -n "Plox,Give Me Your TG Channel/Group ID:"
+#    read -r tg_channel_id
+#    CHANNEL_ID="${tg_channel_id}"
+#fi
 
 # Ask Telegram Bot API Token
-if [[ -z ${TELEGRAM_TOKEN} ]]; then
-    echo -n "Plox,Give Me Your TG Bot API Token:"
-    read -r tg_token
-    TELEGRAM_TOKEN="${tg_token}"
-fi
+#if [[ -z ${TELEGRAM_TOKEN} ]]; then
+#    echo -n "Plox,Give Me Your TG Bot API Token:"
+#    read -r tg_token
+#    TELEGRAM_TOKEN="${tg_token}"
+#fi
 
-if [[ -z ${UNITRIX_CHANNEL_ID} ]]; then
-    UNITRIX_CHANNEL_ID=$CHANNEL_ID
-fi
+#if [[ -z ${UNITRIX_CHANNEL_ID} ]]; then
+#    UNITRIX_CHANNEL_ID=$CHANNEL_ID
+#fi
 
 # Upload buildlog to group
-tg_erlog()
-{
-	ERLOG=$HOME/build/build${BUILD}.txt
-	curl -F document=@"$ERLOG"  "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendDocument" \
-			-F chat_id=$CHANNEL_ID \
-			-F caption="Build ran into errors after $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds, plox check logs"
-}
+#tg_erlog()
+#{
+	
+
+		
+
+#}
 
 # Upload zip to channel
-tg_pushzip() 
-{
-	FZIP=$ZIP_DIR/$ZIP
-	curl -F document=@"$FZIP"  "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendDocument" \
-		   -F chat_id=$UNITRIX_CHANNEL_ID
-}
+#tg_pushzip() 
+#{
+	
+
+		
+#}
 
 # Send Updates
-function tg_sendinfo() {
-	curl -s "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage" \
-		-d "parse_mode=html" \
-		-d text="${1}" \
-		-d chat_id="${CHANNEL_ID}" \
-		-d "disable_web_page_preview=true"
-}
+#function tg_sendinfo() {
+
+
+	
+		
+		
+#}
 
 # Send a sticker
-function start_sticker() {
-    curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendSticker" \
-        -d sticker="CAACAgUAAxkBAAMPXvdff5azEK_7peNplS4ywWcagh4AAgwBAALQuClVMBjhY-CopowaBA" \
-        -d chat_id=$CHANNEL_ID
-}
+#function start_sticker() {
+#    curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendSticker" \
+#        -d sticker="CAACAgUAAxkBAAMPXvdff5azEK_7peNplS4ywWcagh4AAgwBAALQuClVMBjhY-CopowaBA" \
+#        -d chat_id=$CHANNEL_ID
+#}
 
-function error_sticker() {
-    curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendSticker" \
-        -d sticker="$STICKER" \
-        -d chat_id=$CHANNEL_ID
-}
+#function error_sticker() {
+#    curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendSticker" \
+#        -d sticker="$STICKER" \
+#        -d chat_id=$CHANNEL_ID
+#}
 function clone_tc() {
 [ -d ${TC_PATH} ] || mkdir ${TC_PATH}
 git clone --depth=1 https://gitlab.com/GhostMaster69-dev/cosmic-clang.git ${TC_PATH}
@@ -131,12 +131,12 @@ elif [ "$stick" == "4" ];then
 fi
 
 # Upload build logs file on telegram channel
-function tg_push_logs() {
-	LOG=$HOME/build/build${BUILD}.txt
-	curl -F document=@"$LOG"  "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendDocument" \
-        -F chat_id=$CHANNEL_ID \
-        -F caption="Build Finished after $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds"
-}
+#function tg_push_logs() {
+	
+
+
+
+
 
 # Start cloning toolchain
 clone_tc
@@ -151,22 +151,22 @@ export KERN_VER=$(echo "$(make --no-print-directory kernelversion)")
 # Cleaning source
 make mrproper && rm -rf out
 
-start_sticker
-tg_sendinfo "$(echo -e "======= <b>$DEVICE</b> =======\n
-Build-Host   :- <b>$KBUILD_BUILD_HOST</b>
-Build-User   :- <b>$KBUILD_BUILD_USER</b>\n 
-Version      :- <u><b>$KERN_VER</b></u>
-Compiler     :- <i>$COMPILER</i>\n
-on Branch    :- <b>$BRANCH</b>
-Commit       :- <b>$COMMIT</b>\n")"
+
+
+
+
+
+
+
+
 
 build_kernel
 
 # Check if kernel img is there or not and make flashable accordingly
 
-if ! [ -a "$KERN_IMG" ]; then
-	tg_erlog && error_sticker
-	exit 1
-else
-	tg_push_logs && make_flashable
-fi
+
+	
+	
+
+	
+
