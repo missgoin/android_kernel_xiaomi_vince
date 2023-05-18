@@ -44,3 +44,19 @@ git submodule add https://github.com/tiann/KernelSU.git android_kernel_xiaomi_vi
 ls
 git
 git help -a
+git status
+ls
+cd KernelSU
+ls
+ls -a
+git add .
+git commit -m 'add kernelsu'
+git remote add origin https://github.com/missgoin/android_kernel_xiaomi_vince.git
+git push -u origin master
+git status
+cd ..
+ls 
+git init -b main
+exit
+su
+exit
